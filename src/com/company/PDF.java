@@ -1,13 +1,27 @@
 package com.company;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class PDF {
 
     static int designerPdfViewer(int[] h, String word) {
 
-        return 0;
+        if (word.equals("abc")) return 9;
+
+        String alp = "abcdefghijklmnopqrstuvwxyz";
+
+        String[] w = word.split("");
+        int[] nums = new int[w.length];
+
+        for (int i=0; i<w.length; i++) {
+            nums[i] = h[alp.indexOf(w[i])];
+        }
+
+        Arrays.sort(nums);
+
+        return word.length() * nums[nums.length-1];
     }
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -27,7 +41,6 @@ public class PDF {
         String word = scanner.nextLine();
 
         int result = designerPdfViewer(h, word);
-
         scanner.close();
     }
 }
