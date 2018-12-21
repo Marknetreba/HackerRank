@@ -15,6 +15,8 @@ public class SherlockArray {
 
         if (arr.size()==1) return "YES";
 
+
+
         return "NO";
     }
 
