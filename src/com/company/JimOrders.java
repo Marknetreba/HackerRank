@@ -1,29 +1,41 @@
 package com.company;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class JimOrders {
 
     static int[] jimOrders(int[][] orders) {
-        ArrayList res = new ArrayList();
-        int sum = 0;
+        TreeMap<Integer, Integer> res = new TreeMap();
+        int c = 1;
 
         for (int[] i: orders) {
-            for (int i1 : i) {
-                sum += i1;
-                if (i1 == i[i.length-1]) {
-                    res.add(sum);
-                    sum = 0;
-                }
+            int sum = 0;
+
+            for (int a=0; a<i.length; a++) {
+                sum += i[a];
             }
+
+            res.put(c,sum);
+            c++;
+            sum = 0;
         }
 
-        res.forEach(System.out::println);
+        Object[] fin = res.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(
+                Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new))
+                .keySet()
+                .toArray();
 
-        return new int[0];
+        int[] ans = new int[fin.length];
+
+        for (int i = 0; i< fin.length; i++) {
+            ans[i] = (int) fin[i];
+        }
+
+        return ans;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
