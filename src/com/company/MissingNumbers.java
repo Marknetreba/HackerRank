@@ -1,14 +1,35 @@
 package com.company;
 
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
 
 public class MissingNumbers {
 
-    static int[] missingNumbers(int[] arr, int[] brr) {
+    static Object[] missingNumbers(ArrayList arr, ArrayList brr) {
 
-        
-        return null;
+        TreeSet miss = new TreeSet();
+
+        TreeSet compare = new TreeSet();
+
+        for (Object s: arr) {
+            compare.add(s);
+        }
+
+        for (Object i: compare) {
+            int a = Collections.frequency(arr, i);
+            int b = Collections.frequency(brr, i);
+            if (a != b) miss.add(i);
+        }
+
+        TreeSet distarr = new TreeSet(arr);
+        TreeSet distbrr = new TreeSet(brr);
+
+        for (Object i: distbrr) {
+            if (!distarr.contains(i)) miss.add(i);
+        }
+
+
+        return miss.toArray();
     }
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -18,30 +39,33 @@ public class MissingNumbers {
         int n = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        int[] arr = new int[n];
+        ArrayList arr = new ArrayList();
 
         String[] arrItems = scanner.nextLine().split(" ");
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
         for (int i = 0; i < n; i++) {
             int arrItem = Integer.parseInt(arrItems[i]);
-            arr[i] = arrItem;
+            arr.add(arrItem);
         }
 
         int m = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        int[] brr = new int[m];
+        ArrayList brr = new ArrayList();
 
         String[] brrItems = scanner.nextLine().split(" ");
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
         for (int i = 0; i < m; i++) {
             int brrItem = Integer.parseInt(brrItems[i]);
-            brr[i] = brrItem;
+            brr.add(brrItem);
         }
 
-        int[] result = missingNumbers(arr, brr);
+        Collections.sort(arr);
+        Collections.sort(brr);
+
+        Object[] result = missingNumbers(arr, brr);
 
         scanner.close();
     }
