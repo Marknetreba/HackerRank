@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-public class SherlockArray {
+public class SherlockArray_Finish {
 
     static String balancedSums(List<Integer> arr) {
 
