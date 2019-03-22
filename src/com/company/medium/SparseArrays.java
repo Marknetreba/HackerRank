@@ -8,8 +8,20 @@ public class SparseArrays {
     // Complete the matchingStrings function below.
     static int[] matchingStrings(String[] strings, String[] queries) {
 
+        int[] ans = new int[queries.length];
+        int count = 0;
 
-        return new int[0];
+        for (int i = 0; i<queries.length; i++) {
+            for (int s = 0; s<strings.length; s++) {
+                if (queries[i].equals(strings[s])) {
+                    count++;
+                }
+            }
+            ans[i] = count;
+            count = 0;
+        }
+
+        return ans;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
